@@ -1,11 +1,13 @@
-:root {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+body {
+  width: 100%;
+  min-height: 100vh;
   background: linear-gradient(#e55d87, #5fc3e4);
-  /* clip-path: circle(20% at 10% 10%); */
-  height: 100vh;
+  margin: 0;
+}
+
+.header {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* :root {

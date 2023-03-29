@@ -1,12 +1,27 @@
 .cardContainer {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 40px;
 
-  column-gap: 200px;
+  column-gap: 100px;
   margin-top: 100px;
+  margin-bottom: 40px;
   margin-left: 30px;
 }
+.header {
+  width: 100vw;
+  height: 50px;
 
+  background: linear-gradient(#e55d87, #5fc3e4);
+  margin-top: 0;
+
+  display: block;
+}
+.head {
+  font-size: 20px;
+  font-weight: bold;
+}
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
