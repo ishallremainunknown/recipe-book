@@ -1,24 +1,14 @@
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto;
-  gap: 40px;
-
-  column-gap: 100px;
-  margin-top: 100px;
-  margin-bottom: 40px;
-  margin-left: 30px;
-}
-.foodCard {
-}
 .image {
   height: 200px;
   width: 250px;
   border-radius: 15px;
 }
+
 .card {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  padding-left: 5px;
   justify-content: center;
   background-color: darkgray;
   width: 300px;
@@ -32,4 +22,11 @@
 }
 .card:hover {
   transform: translateY(-20px);
+}
+.mainContainer {
+  display: grid;
+}
+.preptime {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

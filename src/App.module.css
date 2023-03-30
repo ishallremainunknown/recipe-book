@@ -1,5 +1,7 @@
 .cardContainer {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   gap: 40px;
@@ -16,11 +18,40 @@
   background: linear-gradient(#e55d87, #5fc3e4);
   margin-top: 0;
 
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 .head {
   font-size: 20px;
   font-weight: bold;
+}
+.addButton {
+  height: 35px;
+  width: 90px;
+  position: absolute;
+  margin-left: -950px;
+  border-radius: 10px;
+  background-color: #e55d87;
+  border: none;
+}
+.mainPage {
+  height: 35px;
+  width: 90px;
+  position: absolute;
+  margin-left: -700px;
+  border-radius: 10px;
+  background-color: #e55d87;
+  border: none;
+}
+.mainPage:hover {
+  cursor: pointer;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+}
+.addButton:hover {
+  cursor: pointer;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
 }
 /* #root {
   max-width: 1280px;

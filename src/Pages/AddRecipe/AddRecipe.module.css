@@ -1,0 +1,33 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+.card {
+  width: 500px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 50px 50px 50px;
+  background-color: #f8d8bd;
+  border-radius: 10px;
+}
+.inputStyle {
+  margin-top: 5px;
+  height: 30px;
+  width: 200px;
+  border-radius: 10px;
+}
+.button {
+  margin-left: 50px;
+  margin-top: 20px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+}
+.button:hover {
+  cursor: pointer;
+}
+.upload {
+}
