@@ -30,3 +30,10 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.description {
+  width: 300px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
