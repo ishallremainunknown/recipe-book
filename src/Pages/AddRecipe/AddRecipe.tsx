@@ -16,7 +16,9 @@ const AddRecipe = () => {
   const [pic, setPic] = useState<File>();
   const [categoryId, setCategoryId] = useState("");
   const stateRecipeList = useSelector((state: StoreType) => state.recipe.recipes);
-  const setCategoryList = useSelector((state: StoreType) => state.category.categories);
+  const stateCategoryList = useSelector((state: StoreType) => state.category.categories);
+
+  const [image, setImage] = useState("");
 
   const saveRecipe = () => {
     if (!title || !prepTime || !preparation) {
@@ -30,10 +32,11 @@ const AddRecipe = () => {
       title: title,
       prepTime: prepTime,
       description: preparation,
-      image: pic,
+      image: image,
       categoryId: categoryId,
     };
     dispatch(addRecipe(newRecipe));
+    handleReset();
   };
   const handleReset = () => {
     setTitle("");
@@ -42,8 +45,27 @@ const AddRecipe = () => {
     setPic(undefined);
   };
   const addCategoryId = (event: ChangeEvent<HTMLSelectElement>) => {
+    console.log("works");
     return setCategoryId(event.target.value);
   };
+
+  const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setPic(event.target.files[0]);
+    }
+  };
+  const convertPic = (e: ChangeEvent<HTMLInputElement>) => {
+    const data = new FileReader();
+    data.addEventListener("load", () => {
+      if (data.result) {
+        setImage(data.result as string);
+      }
+    });
+    if (e.target.files) {
+      data.readAsDataURL(e.target.files[0]);
+    }
+  };
+
   return (
     <div className={s.main}>
       <div className={s.card}>
@@ -60,18 +82,30 @@ const AddRecipe = () => {
          */}
         <label>Select category</label>
         <select onChange={(event) => addCategoryId(event)} className={s.selectInput}>
-          {list.map((cat) => {
+          <option className={s.defaultOption} defaultChecked value={""}>
+            select category
+          </option>
+          {stateCategoryList.map((cat) => {
             const category = cat.category;
             return <option value={cat.id}>{category}</option>;
           })}
         </select>
         <label className={s.inputStyle}>Upload picture:</label>
-        <input className={s.upload} type="file" name="food picture" accept="image/png, image/jpeg" />
-
+        <input
+          id="upload"
+          className={s.upload}
+          type="file"
+          name="food picture"
+          accept="image/png, image/jpeg"
+          onChange={(e) => {
+            handleFileUpload(e);
+            convertPic(e);
+          }}
+        />
+        {pic && <img className={s.uploadPic} src={image} alt="Uploaded recipe" />}
         <button
           onClick={() => {
             saveRecipe();
-            handleReset();
           }}
           className={s.button}
         >

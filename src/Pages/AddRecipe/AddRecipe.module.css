@@ -18,9 +18,10 @@
   height: 30px;
   width: 200px;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 .button {
-  margin-left: 50px;
+  margin-left: 110px;
   margin-top: 20px;
   width: 100px;
   height: 30px;
@@ -44,4 +45,15 @@
   cursor: pointer;
   outline: none;
   border: 3px solid #99737a;
+}
+.upload {
+  height: 30px;
+  width: 300px;
+}
+.uploadPic {
+  height: 100px;
+  width: 100px;
+}
+.defaultOption {
+  background-color: gray;
 }

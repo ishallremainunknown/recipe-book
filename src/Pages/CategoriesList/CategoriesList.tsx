@@ -5,10 +5,10 @@ import { StoreType } from "../../redux/store";
 import { useSelector } from "react-redux";
 
 const CategoriesList = () => {
-  const setCategoryList = useSelector((state: StoreType) => state.category.categories);
+  const stateCategoryList = useSelector((state: StoreType) => state.category.categories);
   return (
     <div className={s.container}>
-      {setCategoryList.map((cat) => {
+      {stateCategoryList.map((cat) => {
         return (
           <div key={cat.id}>
             <FoodCategory image={cat.image} category={cat.category} id={cat.id} />{" "}

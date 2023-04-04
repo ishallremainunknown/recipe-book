@@ -6,13 +6,13 @@ import { Category } from "../../Core/Types/Category.type";
 const FoodCategory = (props: Category) => {
   const navigate = useNavigate();
   const redirect = () => {
-    navigate("/category");
+    navigate(`/category/${props.id}`);
   };
 
   return (
     <div className={s.main}>
       <div onClick={redirect} className={s.card}>
-        <img className={s.image} src={img} alt="food" />
+        <img className={s.image} src={props.image} alt="food" />
         <div className="header"> {props.category}</div>
         <div>Description: </div>
       </div>

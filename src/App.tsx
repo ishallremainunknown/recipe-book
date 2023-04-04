@@ -38,7 +38,7 @@ function App() {
         {/* <BrowserRouter> */}
         <Routes>
           <Route path="/" element={<CategoriesList />} />
-          <Route path="/category" element={<CategoryRecipes />} />
+          <Route path="/category/:id" element={<CategoryRecipes />} />
           <Route path="/recipe" element={<RecipeLanding />} />
           <Route path="/recipe/:id" element={<ClickedRecipe />} />
           <Route path="/addRecipe" element={<AddRecipe />} />
