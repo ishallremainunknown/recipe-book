@@ -12,37 +12,47 @@
   margin-left: 30px;
 }
 .header {
-  width: 100vw;
+  width: 100%;
   height: 50px;
 
-  background: linear-gradient(#e55d87, #5fc3e4);
+  background: #fae5d3;
   margin-top: 0;
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
 }
 .head {
+  margin-left: 20px;
   font-size: 20px;
   font-weight: bold;
+}
+.buttonContainer {
+  position: absolute;
+  margin-left: 35%;
+  gap: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 .addButton {
   height: 35px;
   width: 90px;
-  position: absolute;
-  margin-left: -950px;
+  /* position: absolute;
+  margin-left: 950px; */
   border-radius: 10px;
-  background-color: #e55d87;
+  background-color: #f8d8bd;
   border: none;
 }
 .mainPage {
   height: 35px;
   width: 90px;
-  position: absolute;
-  margin-left: -1200px;
+  /* position: absolute;
+  margin-left: 1200px; */
   border-radius: 10px;
-  background-color: #e55d87;
+  background-color: #f8d8bd;
   border: none;
 }
 .mainPage:hover {
@@ -56,16 +66,43 @@
 .addCategory {
   height: 35px;
   width: 90px;
-  position: absolute;
-  margin-left: -700px;
+  /* position: absolute;
+  margin-left: 700px; */
   border-radius: 10px;
-  background-color: #e55d87;
+  background-color: #f8d8bd;
   border: none;
 }
 .addCategory:hover {
   cursor: pointer;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
 }
+.allRecipes {
+  height: 35px;
+  width: 90px;
+  border-radius: 10px;
+  background-color: #f8d8bd;
+  border: none;
+}
+.allRecipes:hover {
+  cursor: pointer;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+}
+/* @media (max-width: 1250px) {
+  .addButton {
+  }
+  .mainPage {
+  }
+  .addCategory {
+  }
+}
+@media (max-width: 1090px) {
+  .addButton {
+  }
+  .mainPage {
+  }
+  .addCategory {
+  }
+} */
 /* #root {
   max-width: 1280px;
   margin: 0 auto;

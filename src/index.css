@@ -1,7 +1,7 @@
 body {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(#e55d87, #5fc3e4);
+  background-image: url("../src/assets/pictures/nude.jpg");
   margin: 0;
 }
 

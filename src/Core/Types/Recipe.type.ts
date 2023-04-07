@@ -1,6 +1,6 @@
 export type Recipe = {
   title: string;
-  image: File | undefined | string;
+  image: string;
   prepTime: string;
   ingredients: string;
   description: string;

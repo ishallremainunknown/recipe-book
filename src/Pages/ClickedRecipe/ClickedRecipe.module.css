@@ -20,3 +20,20 @@
 .prep {
   margin-bottom: 10px;
 }
+.buttons {
+  margin-top: 30px;
+  width: 300px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.button {
+  height: 30px;
+  border-radius: 10px;
+  background-color: #f8d8bd;
+  border: none;
+}
+.button:hover {
+  cursor: pointer;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+}
