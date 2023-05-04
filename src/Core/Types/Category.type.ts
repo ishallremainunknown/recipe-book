@@ -1,6 +1,6 @@
 export type Category = {
-  image: string | File;
+  image: string | null;
   category: string;
   // name: string;
-  id: string;
+  id?: string;
 };

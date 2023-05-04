@@ -3,9 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { Recipe } from "../Core/Types/Recipe.type";
 interface RecipeState {
   recipes: Recipe[];
+  filteredRecipes: Recipe[];
 }
 const initialState: RecipeState = {
   recipes: [],
+  filteredRecipes: [],
 };
 
 export const RecipeSlice = createSlice({
@@ -32,8 +34,18 @@ export const RecipeSlice = createSlice({
       });
       state.recipes.splice(index, 1);
     },
+    findRecipe: (state, action: PayloadAction<{ searchTerm: string }>) => {
+      const searchTerm = action.payload.searchTerm.toLowerCase();
+      const recipeList = state.recipes;
+      const filteredRecipe = recipeList.filter((recipe) => {
+        if (recipe.title.toLowerCase().includes(searchTerm) && recipe.title.length > 0) {
+          return recipe;
+        }
+      });
+      state.filteredRecipes = filteredRecipe;
+    },
   },
 });
 
-export const { addRecipe, saveEditedRecipe, deleteRecipe } = RecipeSlice.actions;
+export const { addRecipe, saveEditedRecipe, deleteRecipe, findRecipe } = RecipeSlice.actions;
 export default RecipeSlice.reducer;

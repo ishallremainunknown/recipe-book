@@ -28,6 +28,10 @@
   font-size: 20px;
   font-weight: bold;
 }
+.head:hover {
+  cursor: pointer;
+}
+
 .buttonContainer {
   position: absolute;
   margin-left: 35%;

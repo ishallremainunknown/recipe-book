@@ -5,13 +5,20 @@ import RecipeLanding from "./Pages/RecipePage/RecipeLandingPage";
 import CategoryRecipes from "./Pages/CategoryRecipes/CategoryRecipes";
 import CategoriesList from "./Pages/CategoriesList/CategoriesList";
 import ClickedRecipe from "./Pages/ClickedRecipe/ClickedRecipe";
-import AddCategory from "./Pages/AddCategory/AddCategory";
+
 import AddCategoryMain from "./Pages/AddCategory/AddCategoryMain";
 import MainPage from "./Pages/Main Page/MainPage";
 import AllRecipes from "./Pages/All Recipes/AllRecipes";
+import Auth from "./Components/Auth-something/Auth";
+import { useDispatch } from "react-redux";
+import { db } from "./firebase/firebase-config";
+import { useState } from "react";
+import { getDocs, collection } from "firebase/firestore";
 
 function App() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const redirect = () => {
     navigate("/addRecipe");
   };
@@ -27,6 +34,7 @@ function App() {
   const toAllRecipes = () => {
     navigate("/allRecipes");
   };
+
   return (
     <div>
       <div className={s.header}>
@@ -34,7 +42,12 @@ function App() {
           <button onClick={toCategoryList} className={s.mainPage}>
             Categories
           </button>
-          <button onClick={toAllRecipes} className={s.allRecipes}>
+          <button
+            onClick={() => {
+              toAllRecipes();
+            }}
+            className={s.allRecipes}
+          >
             All recipes
           </button>
           <button onClick={redirect} className={s.addButton}>
@@ -60,8 +73,10 @@ function App() {
           <Route path="/recipe/:id" element={<ClickedRecipe />} />
           <Route path="/addRecipe" element={<AddRecipe />} />
           <Route path="/addRecipe/:id" element={<AddRecipe />} />
+          <Route path="/addCategory/:id" element={<AddCategoryMain />} />
           <Route path="/addCategory" element={<AddCategoryMain />} />
           <Route path="*" element={<div>NOT FOUND</div>} />
+          <Route path="/login" element={<Auth />} />
         </Routes>
         {/* </BrowserRouter> */}
       </div>

@@ -1,9 +1,9 @@
 export type Recipe = {
+  id?: string;
   title: string;
-  image: string;
+  image?: string | null;
   prepTime: string;
   ingredients: string;
   description: string;
-  id: string;
   categoryId: string;
 };

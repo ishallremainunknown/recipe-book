@@ -1,45 +1,108 @@
 import s from "./AddCategory.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Category } from "../../Core/Types/Category.type";
 import { addCategory } from "../../redux/category-slice";
 import { ChangeEvent } from "react";
 import AppInput from "../../Components/Input/Input";
 import { v4 as uuid } from "uuid";
+import useFireBaseCategories from "../../Hooks/useFirebaseCategories";
+import { useNavigate, useParams } from "react-router-dom";
+import useFirebaseFiles from "../../Hooks/useFirebaseFiles";
 
 const AddCategory = () => {
+  const { id } = useParams<string>();
+  const navigate = useNavigate();
+
   const [categoryName, setCategoryName] = useState("");
-  const [image, setImage] = useState("");
+  const [currentlyEditedCategoryId, setCurrentlyEditedCategoryId] = useState("");
+  const [image, setImage] = useState<File>();
+
   const dispatch = useDispatch();
 
-  const addNewCategory = (event: any) => {
-    const newCategory: Category = {
-      image: image,
-      category: categoryName,
-      id: uuid(),
-    };
-    console.log(newCategory);
+  const { addCategory } = useFireBaseCategories();
+  const { getCategoryById } = useFireBaseCategories();
+  const { editCategory } = useFireBaseCategories();
+  const { uploadCategoryImage } = useFirebaseFiles();
 
+  const [isEditing, setIsEditing] = useState<Boolean>(false);
+
+  useEffect(() => {
+    setCurrentlyEditedCategoryId(id as string);
+    editCurrentCategory();
+  }, [id]);
+
+  const addNewCategory = async () => {
+    let imageURL: string | null = null;
+    if (image) {
+      imageURL = await uploadCategoryImage(image);
+    }
     if (!categoryName) {
       alert("please fill in the field!");
       return;
     }
-    dispatch(addCategory(newCategory));
+    const newCategory: Category = {
+      image: imageURL,
+      category: categoryName,
+    };
+    console.log(newCategory);
+    await addCategory(newCategory);
+    //dispatch(addCategory(newCategory));
   };
 
+  const editCurrentCategory = async () => {
+    let imageURL: string | null = null;
+    if (image) {
+      imageURL = await uploadCategoryImage(image);
+    }
+    const foundCategory = await getCategoryById(id as string);
+    if (foundCategory) {
+      setCategoryName(foundCategory.category);
+      setIsEditing(true);
+      setImage(image);
+    }
+    editCategory(foundCategory);
+  };
   const handleReset = () => {
     setCategoryName("");
+    setImage(undefined);
   };
-  const convertPic = (e: ChangeEvent<HTMLInputElement>) => {
-    const data = new FileReader();
-    data.addEventListener("load", () => {
-      if (data.result) {
-        setImage(data.result as string);
-      }
-    });
-    if (e.target.files) {
-      data.readAsDataURL(e.target.files[0]);
+  const saveChanges = async () => {
+    let imageURL: string | null = null;
+    if (image) {
+      imageURL = await uploadCategoryImage(image);
     }
+
+    if (currentlyEditedCategoryId) {
+      const editedCategory: Category = {
+        category: categoryName,
+        image: imageURL,
+        id: id,
+      };
+
+      editCategory(editedCategory);
+      setTimeout(() => handleReset());
+      setIsEditing(false);
+    }
+  };
+
+  const convertPic = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const uploadedFile = e.target.files[0];
+      const link = await uploadCategoryImage(uploadedFile);
+      console.log(link);
+      setImage(uploadedFile);
+    }
+
+    // const data = new FileReader();
+    // data.addEventListener("load", () => {
+    //   if (data.result as ArrayBuffer) {
+    //     setImage(data.result);
+    //   }
+    // });
+    // if (e.target.files) {
+    //   data.readAsDataURL(e.target.files[0]);
+    // }
   };
 
   return (
@@ -60,15 +123,30 @@ const AddCategory = () => {
           }}
         />
         {image && <img className={s.uploadedImage} src={image} alt="Uploaded recipe" />}
-        <button
-          onClick={(e) => {
-            addNewCategory(e);
-            handleReset();
-          }}
-          className={s.button}
-        >
-          Save
-        </button>
+        {!isEditing && (
+          <button
+            onClick={() => {
+              addNewCategory();
+
+              handleReset();
+              navigate("/categoryList");
+            }}
+            className={s.button}
+          >
+            Add category
+          </button>
+        )}
+        {isEditing === true && (
+          <button
+            onClick={() => {
+              saveChanges();
+              handleReset();
+              navigate("/categoryList");
+            }}
+          >
+            Save changes
+          </button>
+        )}
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const FoodCategory = (props: Category) => {
       <div onClick={redirect} className={s.card}>
         <img className={s.image} src={props.image} alt="food" />
         <div className="header"> {props.category}</div>
-        <div>Description: </div>
+        <div> </div>
       </div>
     </div>
   );
